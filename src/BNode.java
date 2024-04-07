@@ -30,6 +30,9 @@ public class BNode {
     public int getID(){
         return id;
     }
+    public String getName(){
+        return name;
+    }
     public String toString(){
         return name + id;
     }

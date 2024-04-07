@@ -4,12 +4,17 @@ public class Main {
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        BSTree myEmployees = new BSTree();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        myEmployees.insert(50, "Bugs Bunny");
+        myEmployees.insert(30, "Mickey Mouse");
+        myEmployees.insert(80, "Minnie Mouse");
+        myEmployees.insert(25, "Donald Duck");
+        myEmployees.insert(65, "Pluto");
+        myEmployees.insert(40, "Santa Claus");
+        myEmployees.insert(100, "Queen Elsa");
+        myEmployees.insert(70, "Anna");
+        myEmployees.insert(58, "Olaf");
+        System.out.println(myEmployees);
     }
 }
