@@ -15,6 +15,21 @@ public class Main {
         myEmployees.insert(100, "Queen Elsa");
         myEmployees.insert(70, "Anna");
         myEmployees.insert(58, "Olaf");
+        System.out.println();
+        System.out.println(myEmployees.preOrderString());
+        System.out.println(myEmployees.inOrderString());
+        System.out.println(myEmployees.postOrderString());
+        System.out.println();
         System.out.println(myEmployees);
+        System.out.println(myEmployees.findIdNumOf("Olaf"));
+        System.out.println(myEmployees.findIdNumOf("Minnie Mouse"));
+        System.out.println(myEmployees.findIdNumOf("Santa Claus"));
+        System.out.println(myEmployees.numEntriesBetween(50, 25));
+        System.out.println(myEmployees.numEntriesBetween(30, 25));
+        System.out.println(myEmployees.numEntriesBetween(25, 40));
+        System.out.println(myEmployees.numEntriesBetween(100, 58)) ;
+        System.out.println(myEmployees.numEntriesBetween(25, 70));
+        System.out.println(myEmployees.numEntriesBetween(40, 65));
+
     }
 }

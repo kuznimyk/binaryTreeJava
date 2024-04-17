@@ -41,69 +41,65 @@ public class BSTree {
     }
 
     public String preOrderString(){
-        return preOrder(root);
+        return preOrder(root,  new String[]{""});
     }
-    private String preOrder(BNode root){
-        BNode node = root;
-        if (node.getLeftChild() != null){
-            return node.getName() + " " + preOrder(node.getLeftChild());
+    private String preOrder(BNode node, String[] res){
+        if (node == null){
+            return "";
         }
-        else if (node.getRightChild() != null){
-            return node.getName() + " " + preOrder(node.getRightChild());
-        }
-        else{
-            return node.getName();
-        }
+        res[0] += node.getName() + " ";
+        preOrder(node.getLeftChild(), res);
+        preOrder(node.getRightChild(), res);
+
+        return res[0];
     }
 
     public String postOrderString(){
-        return postOrder(root);
+        return postOrder(root, new String[]{""}) ;
     }
 
-    private String postOrder(BNode root){
-        BNode node = root;
-        if (node.getLeftChild() != null){
-            return   preOrder(node.getLeftChild()) + " " + node.getName() ;
+    private String postOrder(BNode node, String[] res){
+        if (node == null){
+            return "";
         }
-        else if (node.getRightChild() != null){
-            return  preOrder(node.getRightChild()) + " " +  node.getName();
-        }
-        else{
-            return node.getName();
-        }
+        postOrder(node.getLeftChild(), res);
+        postOrder(node.getRightChild(), res);
+
+        res[0] += node.getName() + " ";
+
+
+        return res[0];
     }
 
     public String inOrderString(){
-        return inOrder(root);
+        return inOrder(root, new String[]{""});
     }
 
-    private String inOrder(BNode root){
-        BNode node = root;
-        if (node.getLeftChild() != null){
-            return   preOrder(node.getLeftChild()) + " " + node.getName() ;
+    private String inOrder(BNode node, String[] res){
+        if (node == null) {
+            return ""; // Return empty string if the root is null
         }
-        else if (node.getRightChild() != null){
-            return    node.getName() + " " + preOrder(node.getRightChild()) ;
-        }
-        else{
-            return node.getName();
-        }
+        inOrder(node.getLeftChild(), res);
+        res[0] += node.getName() + " ";
+        inOrder(node.getRightChild(), res);
+
+        // Combine the results from left subtree, current node's ID, and right subtree
+        return  res[0];
     }
 
     public String toString(){
         return inOrderId(root);
     }
     private String inOrderId(BNode root){
-        BNode node = root;
-        if (node.getLeftChild() != null){
-            return   preOrder(node.getLeftChild()) + " " + node.getID() ;
+        if (root == null) {
+            return ""; // Return empty string if the root is null
         }
-        else if (node.getRightChild() != null){
-            return    node.getID() + " " + preOrder(node.getRightChild()) ;
-        }
-        else{
-            return node.getID() + "";
-        }
+
+        String leftString = inOrderId(root.getLeftChild());
+        String rightString = inOrderId(root.getRightChild());
+
+        // Combine the results from left subtree, current node's ID, and right subtree
+        return leftString + " " + root.toString() + " " + rightString;
     }
 
     public String findNameOf(int id){
@@ -141,21 +137,15 @@ public class BSTree {
         return findName(root, name);
     }
 
-    private int findName(BNode root, String name){
-        BNode node = root;
+    private int findName(BNode node, String name){
+        if (node == null){
+            return 0;
+        }
         if (node.getName() == name){
             return node.getID();
         }
         else{
-            if (node.getRightChild() != null){
-                return 0 + findName(node.getRightChild(), name);
-            }
-            else if (node.getLeftChild() != null){
-                return 0 + findName(node.getLeftChild(), name);
-            }
-            else{
-                return 0;
-            }
+            return findName(node.getLeftChild(), name) + findName(node.getRightChild(),name);
         }
     }
 
@@ -166,17 +156,21 @@ public class BSTree {
         return distanceFromAncestor( nodeX,ancestor) + distanceFromAncestor( nodeY,ancestor);
     }
 
-    private BNode findNodeById(BNode root, int id){
+    private BNode findNodeById(BNode root, int id) {
         BNode node = root;
-        if (node.getID() == id){
+        if (node == null) {
+            return null;
+        }
+        else if (node.getID() == id) {
             return node;
         }
-        else{
-            if (node.getRightChild() != null){
-                return findNodeById(node.getRightChild(), id);
-            }
-            else if (node.getLeftChild() != null){
-                return findNodeById(node.getLeftChild(), id);
+        else {
+            BNode resleft, resright;
+
+            resright = findNodeById(node.getRightChild(), id);
+            resleft = findNodeById(node.getLeftChild(), id);
+            if (resright != null || resleft != null){
+                return resleft == null ? resright : resleft;
             }
             else{
                 return null;
@@ -209,9 +203,9 @@ public class BSTree {
 
         // Recursively find the distance from node to ancestor
         if (node.getID() < ancestor.getID()) {
-            return 1 + distanceFromAncestor(node.getRightChild(), ancestor);
+            return 1 + distanceFromAncestor(node, ancestor.getLeftChild());
         } else {
-            return 1 + distanceFromAncestor(node.getLeftChild(), ancestor);
+            return 1 + distanceFromAncestor(node, ancestor.getRightChild());
         }
     }
 }
