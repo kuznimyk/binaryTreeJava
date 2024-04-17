@@ -1,3 +1,25 @@
+/*
+<<<<<<< HEAD
+
+                                                Ý Æ Ã-Ø Œ ¿
+
+Code description:
+    Binary tree and recursion
+
+Authors:
+    * Mykyta Kuznietsov
+
+
+Class:
+    * AUCSC 112 LAB 1H04
+
+ID numbers:
+    * 1796900
+
+Date:
+    * 16 April, 2024
+
+*/
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
